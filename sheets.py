@@ -6,10 +6,10 @@ from googleapiclient.discovery import build
 from googleapiclient.errors import HttpError
 
 class Sheets():
-    def __init__(self, scopes, sample_spreadsheets_id, sample_range_name):
+    def __init__(self, scopes, spreadsheets_id, range_name):
         self.scopes = scopes,
-        self.sample_spreadsheets_id = sample_spreadsheets_id,
-        self.sample_range_name = sample_range_name
+        self.spreadsheets_id = spreadsheets_id,
+        self.range_name = range_name
         # Authentication
         self.creds = None
 
@@ -39,8 +39,7 @@ class Sheets():
             # Call the Sheets API
             sheet = service.spreadsheets()
             result = (
-                sheet.values()
-                .get(spreadsheetId=self.sample_spreadsheets_id, range=self.sample_range_name)
+                sheet.batchUpdate(spreadsheetId=self.spreadsheets_id, body=self.range_name)
                 .execute()
             )
             values = result.get("values", [])

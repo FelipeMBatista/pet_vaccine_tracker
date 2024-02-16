@@ -7,11 +7,11 @@ import sheets
 SCOPES = "https://www.googleapis.com/auth/spreadsheets"
 
 # The ID and range of a sample spreadsheet.
-SAMPLE_SPREADSHEET_ID = "1h-WbK4T6rUvD7eUoIO5tBE3pQjxSxrGiKWLpY4lKuEQ"
-SAMPLE_RANGE_NAME = "2024!A2:F5"
+SPREADSHEET_ID = "1h-WbK4T6rUvD7eUoIO5tBE3pQjxSxrGiKWLpY4lKuEQ"
+RANGE_NAME = "2024"
 
 def main():
-    google_sheets = sheets.Sheets(SCOPES, SAMPLE_SPREADSHEET_ID, SAMPLE_RANGE_NAME)
+    google_sheets = sheets.Sheets(SCOPES, SPREADSHEET_ID, RANGE_NAME)
     google_sheets.login()
     google_sheets.read_sheet()
 
