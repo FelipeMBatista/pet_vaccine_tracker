@@ -7,8 +7,8 @@ from googleapiclient.errors import HttpError
 
 class Sheets():
     def __init__(self, scopes, spreadsheets_id, range_name):
-        self.scopes = scopes,
-        self.spreadsheets_id = spreadsheets_id,
+        self.scopes = scopes
+        self.spreadsheets_id = spreadsheets_id
         self.range_name = range_name
         # Authentication
         self.creds = None
@@ -34,22 +34,20 @@ class Sheets():
 
     def read_sheet(self):
         try:
+            print('Estou aqui')
+            print(self.creds.to_json)
             service = build("sheets", "v4", credentials=self.creds)
 
             # Call the Sheets API
             sheet = service.spreadsheets()
-            result = (
-                sheet.batchUpdate(spreadsheetId=self.spreadsheets_id, body=self.range_name)
-                .execute()
-            )
+            result = sheet.values().get(spreadsheetId=self.spreadsheets_id, range=self.range_name).execute()
             values = result.get("values", [])
 
             if not values:
                 print("No data found")
                 return
 
-            print("Column, Column")
-            print(values)
+            return values
 
         except HttpError as err:
             print(err)
