@@ -34,8 +34,6 @@ class Sheets():
 
     def read_sheet(self):
         try:
-            print('Estou aqui')
-            print(self.creds.to_json)
             service = build("sheets", "v4", credentials=self.creds)
 
             # Call the Sheets API

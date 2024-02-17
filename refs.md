@@ -12,3 +12,9 @@ https://developers.google.com/sheets/api/guides/values?hl=pt-br
 
 GOOGLE SHEETS API DOC EXEMPLOS
 https://developers.google.com/sheets/api/samples/reading?hl=pt-br
+
+ENVIAR MENSAGEM POR LINK DE WHATSAPP
+https://faq.whatsapp.com/5913398998672934/
+
+ENCODE
+https://www.urlencoder.io/python/
