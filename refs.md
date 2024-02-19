@@ -18,3 +18,6 @@ https://faq.whatsapp.com/5913398998672934/
 
 ENCODE
 https://www.urlencoder.io/python/
+
+TUTORIAL EMAIL
+https://www.youtube.com/watch?v=N97q96BygUg

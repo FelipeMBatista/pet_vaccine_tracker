@@ -6,6 +6,9 @@ from googleapiclient.discovery import build
 from googleapiclient.errors import HttpError
 
 class Sheets():
+    """
+    Class designed to create a connection with the GoogleSheets API
+    """
     def __init__(self, scopes, spreadsheets_id, range_name):
         self.scopes = scopes
         self.spreadsheets_id = spreadsheets_id
@@ -34,6 +37,7 @@ class Sheets():
 
     def read_sheet(self):
         try:
+            # Starting the service
             service = build("sheets", "v4", credentials=self.creds)
 
             # Call the Sheets API
