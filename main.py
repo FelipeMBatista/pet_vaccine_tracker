@@ -8,11 +8,19 @@ import urllib.parse
 from email.message import Message
 import smtplib
 
+from dotenv import load_dotenv, find_dotenv
+
+import os
+
+load_dotenv()
+
+print(os.getenv("scope"))
+
 # If modifying these scopes, delete the file token.json.
-SCOPES = ["https://www.googleapis.com/auth/spreadsheets"]
+SCOPES = [os.getenv("scope")]
 # The ID and range of a sample spreadsheet.
-SPREADSHEET_ID = "1h-WbK4T6rUvD7eUoIO5tBE3pQjxSxrGiKWLpY4lKuEQ"
-RANGE_NAME = "2024"
+SPREADSHEET_ID = os.getenv("spreadsheet_id")
+RANGE_NAME = os.getenv("range_name")
 
 # If you are not going to use Gmail, change the Server
 SMTP_SERVER = "smtp.gmail.com"
@@ -36,9 +44,9 @@ def send_email(subject, final_msg):
 
     msg = Message()
     msg['Subject'] = subject
-    msg['From'] = "felipemenegasbatista08@gmail.com"
-    msg['To'] = "felipembatista08@gmail.com"
-    password = "ckil mrnr ehrh vgln"
+    msg['From'] = os.getenv("email_from")
+    msg['To'] = os.getenv("email_to")
+    password = os.getenv("sender_password")
 
     msg.add_header('Content-Type', 'text/html')
     msg.set_payload(final_msg)
