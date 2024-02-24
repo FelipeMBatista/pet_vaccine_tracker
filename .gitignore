@@ -1,2 +1,2 @@
-credentials.json
-variables.env
+*.json
+*.env

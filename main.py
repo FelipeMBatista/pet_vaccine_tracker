@@ -8,19 +8,17 @@ import urllib.parse
 from email.message import Message
 import smtplib
 
-from dotenv import load_dotenv, find_dotenv
-
 import os
+
+from dotenv import load_dotenv
 
 load_dotenv()
 
-print(os.getenv("scope"))
-
 # If modifying these scopes, delete the file token.json.
-SCOPES = [os.getenv("scope")]
+SCOPES = [os.getenv("SCOPE")]
 # The ID and range of a sample spreadsheet.
-SPREADSHEET_ID = os.getenv("spreadsheet_id")
-RANGE_NAME = os.getenv("range_name")
+SPREADSHEET_ID = os.getenv("SPREADSHEET_ID")
+RANGE_NAME = os.getenv("RANGE_NAME")
 
 # If you are not going to use Gmail, change the Server
 SMTP_SERVER = "smtp.gmail.com"
@@ -44,9 +42,9 @@ def send_email(subject, final_msg):
 
     msg = Message()
     msg['Subject'] = subject
-    msg['From'] = os.getenv("email_from")
-    msg['To'] = os.getenv("email_to")
-    password = os.getenv("sender_password")
+    msg['From'] = os.getenv("EMAIL_FROM")
+    msg['To'] = os.getenv("EMAIL_TO")
+    password = os.getenv("SENDER_PASSWORD")
 
     msg.add_header('Content-Type', 'text/html')
     msg.set_payload(final_msg)
