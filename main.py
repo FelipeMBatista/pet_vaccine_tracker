@@ -16,7 +16,7 @@ load_dotenv()
 
 # If modifying these scopes, delete the file token.json.
 SCOPES = [os.getenv("SCOPE")]
-# The ID and range of a sample spreadsheet.
+# The ID and page (range) of a sample spreadsheet.
 SPREADSHEET_ID = os.getenv("SPREADSHEET_ID")
 RANGE_NAME = os.getenv("RANGE_NAME")
 
