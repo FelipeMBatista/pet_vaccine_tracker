@@ -9,12 +9,14 @@ class Sheets():
     """
     Class designed to create a connection with the GoogleSheets API
     """
-    def __init__(self, scopes, spreadsheets_id, range_name):
+    def __init__(self, scopes, spreadsheet_id, range_name):
         self.scopes = scopes
-        self.spreadsheets_id = spreadsheets_id
+        self.spreadsheet_id = spreadsheet_id
         self.range_name = range_name
         # Authentication
         self.creds = None
+        # Build
+        self.service = None
 
     def login(self):
         # Checking if the token already exists.
@@ -35,14 +37,16 @@ class Sheets():
             with open("token.json", "w") as token:
                 token.write(self.creds.to_json())
 
+    def build(self):
+        # Starting the service
+        self.service = build("sheets", "v4", credentials=self.creds)
+
     def read_sheet(self):
         try:
-            # Starting the service
-            service = build("sheets", "v4", credentials=self.creds)
-
+            self.service = build("sheets", "v4", credentials=self.creds)
             # Call the Sheets API
-            sheet = service.spreadsheets()
-            result = sheet.values().get(spreadsheetId=self.spreadsheets_id, range=self.range_name).execute()
+            sheet = self.service.spreadsheets()
+            result = sheet.values().get(spreadsheetId=self.spreadsheet_id, range=self.range_name).execute()
             values = result.get("values", [])
 
             if not values:
@@ -53,3 +57,48 @@ class Sheets():
 
         except HttpError as err:
             print(err)
+
+    def yellow_color(self):
+        # Definir a cor da célula
+        color = {
+            "red": 0.7,  # Valor entre 0 e 1
+            "green": 1.0,
+            "blue": 0.7,
+        }
+
+        # Obter o ID da planilha com base no nome da planilha
+        spreadsheet = self.service.spreadsheets().get(spreadsheetId=self.spreadsheet_id).execute()
+        sheet_id = spreadsheet['sheets'][0]['properties']['sheetId']
+
+        # Montar a solicitação de atualização
+        request = {
+            "updateCells": {
+                "range": {
+                    "sheetId": sheet_id,  # Usar o sheet_id obtido anteriormente
+                    "startRowIndex": 2,  # Índice da linha da célula
+                    "startColumnIndex": 6,  # Índice da coluna inicial da linha
+                },
+                "rows": [
+                    {
+                        "values": [
+                                      {
+                                          "userEnteredFormat": {
+                                              "backgroundColor": color,
+                                          }
+                                      }
+                                  ]
+                    }
+                ],
+                "fields": "userEnteredFormat.backgroundColor",
+            }
+        }
+
+        # Enviar a solicitação de atualização
+        self.service.spreadsheets().batchUpdate(
+            spreadsheetId=self.spreadsheet_id,
+            body={
+                "requests": [request]
+            }
+        ).execute()
+
+        print("Cor da linha atualizada com sucesso!")
