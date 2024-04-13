@@ -142,33 +142,35 @@ def main():
     # Instantiating the Google sheets class.
     google_sheets = sheets.Sheets(SCOPES, SPREADSHEET_ID, RANGE_NAME)
     google_sheets.login()
+    google_sheets.build()
     values = google_sheets.read_sheet() # Receiving the values from the spreadsheet.
+    print(f"{values}\n\n")
+    google_sheets.yellow_color()
 
+    # clients = []
+    # for row in values[1::]:
+    #     """
+    #     Here we walk through the lines of the spreadsheet. Starting with the second line as the first is the "Header".
+    #
+    #     Its columns will be stored separately so that the values can later be used for client instantiation.
+    #     """
+    #     name = row[0]
+    #     pet_name = row[1]
+    #     vaccine_date = date(int(row[2][6::]), int(row[2][3:5]), int(row[2][:2]))
+    #     dose = int(row[3])
+    #     brand = row[4]
+    #     phone = int(row[5])
+    #     new_client = Client(
+    #         name=name,
+    #         pet_name=pet_name,
+    #         vaccine_date=vaccine_date,
+    #         dose=dose,
+    #         brand=brand,
+    #         phone=phone
+    #     )
+    #     clients.append(new_client)
 
-    clients = []
-    for row in values[1::]:
-        """
-        Here we walk through the lines of the spreadsheet. Starting with the second line as the first is the "Header".
-        
-        Its columns will be stored separately so that the values can later be used for client instantiation.
-        """
-        name = row[0]
-        pet_name = row[1]
-        vaccine_date = date(int(row[2][6::]), int(row[2][3:5]), int(row[2][:2]))
-        dose = int(row[3])
-        brand = row[4]
-        phone = int(row[5])
-        new_client = Client(
-            name=name,
-            pet_name=pet_name,
-            vaccine_date=vaccine_date,
-            dose=dose,
-            brand=brand,
-            phone=phone
-        )
-        clients.append(new_client)
-
-    start_the_reminders(clients) # Starting reminders...
+    # start_the_reminders(clients) # Starting reminders...
 
 
 if __name__ == "__main__":
