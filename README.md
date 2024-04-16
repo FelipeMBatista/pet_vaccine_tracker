@@ -9,6 +9,7 @@ Este código tem como objetivo ajudar a monitorar a vacinação dos clientes de 
 - Crie uma planilha no Google Sheets com as seguintes colunas, conforme exemplo:
 
 ![sheet_example.png](sheet_example.png)
+- Importante, são 2 linhas de cabeçalho. Optei por congelar mas não é obrigatório.
 
 **Formatos**
 
