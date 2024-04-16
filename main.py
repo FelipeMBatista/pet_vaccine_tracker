@@ -1,6 +1,6 @@
 from datetime import date, timedelta
 
-from client import Client
+from vaccine_client import Client
 import sheets
 
 import urllib.parse
@@ -94,8 +94,8 @@ def main():
         Its columns will be stored separately so that the values can later be used for client instantiation.
         """
         # print(row)
-        if not row[0]:  # Verificar se a linha está vazia
-            continue  # Pular para a próxima iteração se a linha estiver vazia
+        if not row[0]:
+            continue
 
         name = row[0]
         pet_name = row[1]
