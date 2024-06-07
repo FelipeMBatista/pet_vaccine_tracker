@@ -23,13 +23,19 @@ class Vaccine_tracker():
 
         for client in clients:
             if client.dose == 1:
-                if (client.vaccine_date + timedelta(days=23)) >= self.today >= (
-                        client.vaccine_date + timedelta(days=23, weeks=-1)):
+                if (client.vaccine_date + timedelta(weeks=4)) >= self.today >= (
+                        client.vaccine_date + timedelta(weeks=3)):
                     """
                     If today is within one week before the final date of the first dose...
     
                     The idea is that today is one week before the customer's first dose is due.
                     """
+
+                    print(f"Nome: {client.name}")
+                    print(f"Data da vacina: {client.vaccine_date}")
+                    print(f"Data da vacina + 1 mes: {client.vaccine_date + timedelta(weeks=4)}")
+                    print(f"Data de hoje: {self.today}")
+                    print(f"Data da vacina 1 semana antes de fechar 1 mes: {client.vaccine_date + timedelta(weeks=3)}")
 
                     # Message that will be sent to the customer. This message will be embedded in the WhatsApp message link.
                     msg = (
@@ -41,13 +47,19 @@ class Vaccine_tracker():
                     gsheets.update_cell_value(client.row_number, wpp_msg_link)
 
             elif client.dose == 2:
-                if (client.vaccine_date + timedelta(days=358)) >= self.today >= (
-                        client.vaccine_date + timedelta(days=358, weeks=-1)):
+                if (client.vaccine_date + timedelta(days=365)) >= self.today >= (
+                        client.vaccine_date + timedelta(days=365, weeks=-1)):
                     """
                     If today is within one week before the annual revaccination...
     
                     The idea is that today is one week before the annual revaccination.
                     """
+
+                    print(f"Nome: {client.name}")
+                    print(f"Data da vacina: {client.vaccine_date}")
+                    print(f"Data da vacina + 1 ano: {client.vaccine_date + timedelta(days=365)}")
+                    print(f"Data de hoje: {self.today}")
+                    print(f"Data da vacina 1 semana antes de fechar 1 ano: {client.vaccine_date + timedelta(days=365, weeks=-1)}")
 
                     msg = (
                         f"Bom dia {client.name.split()[0].title()}, tudo bem? Aqui é da {self.petshop_name} e estou entrando em "
