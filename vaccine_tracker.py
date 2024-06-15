@@ -23,31 +23,47 @@ class Vaccine_tracker():
 
         for client in clients:
             if client.dose == 1:
-                if (client.vaccine_date + timedelta(days=23)) >= self.today >= (
-                        client.vaccine_date + timedelta(days=23, weeks=-1)):
+                if (client.vaccine_date + timedelta(days=30)) >= self.today >= (
+                        client.vaccine_date + timedelta(days=20)):
                     """
                     If today is within one week before the final date of the first dose...
     
-                    The idea is that today is one week before the customer's first dose is due.
+                    The idea is that today is 9 days before the customer's first dose is due.
                     """
 
+                    print(f"Nome: {client.name}")
+                    print(f"Data da vacina: {client.vaccine_date}")
+                    print(f"Data da vacina + 1 mes: {client.vaccine_date + timedelta(weeks=4)}")
+                    print(f"Data de hoje: {self.today}")
+                    print(f"Data da vacina 1 dia antes de fechar os 21: {client.vaccine_date + timedelta(days=20)}")
+
                     # Message that will be sent to the customer. This message will be embedded in the WhatsApp message link.
+                    vaccine_date_delta_21 = client.vaccine_date+timedelta(days=21)
+                    vaccine_date_delta_30 = client.vaccine_date + timedelta(days=30)
                     msg = (
                         f"Bom dia {client.name.split()[0].title()}, tudo bem? Aqui é da {self.petshop_name} e estou entrando em "
-                        f"contato para lembrar da segunda dose da vacina do seu pet {client.pet_name.title()} que vence "
-                        f"dentro de uma semana.\n\nCaso queira marcar a vacina, só nos avisar, ok?")
+                        f"contato para lembrar da próxima dose da vacina do seu pet '{client.pet_name.title()}' que vence "
+                        f"dentre os dias {vaccine_date_delta_21.day}/{vaccine_date_delta_21.month}/{vaccine_date_delta_21.year} e "
+                        f"{vaccine_date_delta_30.day}/{vaccine_date_delta_30.month}/{vaccine_date_delta_30.year}."
+                        f"\n\nCaso queira marcar a vacina, só nos avisar, ok?")
                     wpp_msg = urllib.parse.quote(msg)  # Transforming into a url encoding
                     wpp_msg_link = f"wa.me/+55{client.phone}?text={wpp_msg}"
                     gsheets.update_cell_value(client.row_number, wpp_msg_link)
 
             elif client.dose == 2:
-                if (client.vaccine_date + timedelta(days=358)) >= self.today >= (
-                        client.vaccine_date + timedelta(days=358, weeks=-1)):
+                if (client.vaccine_date + timedelta(days=365)) >= self.today >= (
+                        client.vaccine_date + timedelta(days=365, weeks=-1)):
                     """
                     If today is within one week before the annual revaccination...
     
                     The idea is that today is one week before the annual revaccination.
                     """
+
+                    print(f"Nome: {client.name}")
+                    print(f"Data da vacina: {client.vaccine_date}")
+                    print(f"Data da vacina + 1 ano: {client.vaccine_date + timedelta(days=365)}")
+                    print(f"Data de hoje: {self.today}")
+                    print(f"Data da vacina 1 semana antes de fechar 1 ano: {client.vaccine_date + timedelta(days=365, weeks=-1)}")
 
                     msg = (
                         f"Bom dia {client.name.split()[0].title()}, tudo bem? Aqui é da {self.petshop_name} e estou entrando em "
