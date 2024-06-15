@@ -5,14 +5,16 @@ from google_auth_oauthlib.flow import InstalledAppFlow
 from googleapiclient.discovery import build
 from googleapiclient.errors import HttpError
 
-
-class Sheets():
+class Sheets:
     # Class designed to create a connection with the GoogleSheets API
 
     def __init__(self, scopes, spreadsheet_id, range_name):
         self.scopes = scopes
         self.spreadsheet_id = spreadsheet_id
         self.range_name = range_name
+        self.global_path = os.path.dirname(os.path.realpath(__file__))
+        self.credentials_path = os.path.join(self.global_path, 'credentials.json')
+        self.token_path = os.path.join(self.global_path, 'token.json')
         # Authentication
         self.creds = None
         # Build
@@ -22,8 +24,8 @@ class Sheets():
 
     def login(self):
         # Checking if the token already exists.
-        if os.path.exists("token.json"):
-            self.creds = Credentials.from_authorized_user_file("token.json", self.scopes)
+        if os.path.exists(self.token_path):
+            self.creds = Credentials.from_authorized_user_file(self.token_path, self.scopes)
 
         # If there are no (valid) credentials available, let the user log in.
         if not self.creds or not self.creds.valid:
@@ -31,7 +33,7 @@ class Sheets():
                 self.creds.refresh(Request())
             else:
                 flow = InstalledAppFlow.from_client_secrets_file(
-                    "credentials.json", self.scopes
+                    self.credentials_path, self.scopes
                 )
                 self.creds = flow.run_local_server(port=0)
 
