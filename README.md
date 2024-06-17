@@ -25,7 +25,7 @@ Este código tem como objetivo ajudar a monitorar a vacinação dos clientes de 
 ## Modo de Uso
 
 - Preencha a planilha conforme o cliente vacina seus pets, atentando-se à coluna "Dose", como citado acima, pois irá definir o período para lembrete.
-- Execute o código pelo menos uma vez por dia. Ele fará uma checagem nas datas e definirá um lembrete pelo menos 1 semana antes da data de renovação.
+- Execute o código pelo menos uma vez por dia (Pode ser configurado o Task Manager). Ele fará uma checagem nas datas e definirá um lembrete pelo menos 1 semana antes da data de renovação.
 - O lembrete será inserido como forma de link para o whatsapp já com a mensagem pronta para o cliente e a coloração indicativa para enviar lembrete.
 
 Este código foi desenvolvido para uso interno em um petshop onde trabalho atualmente. Identifiquei esta necessidade, e como a empresa já tem um software terceiro como sistema principal, não busquei tentar integração, pois demandaria muito tempo e talvez nem seria possível. Portanto, não há controle de vendas nem nada muito automatizado, pois não há controle nem garantia de se o cliente realmente foi fazer a nova dose ou se ela expirou, sendo então necessárias mudanças nas doses do pet.
