@@ -1,4 +1,4 @@
-class Client():
+class Client:
     def __init__(self, name, pet_name, vaccine_date, dose, brand, phone, row_number):
         self.name = name
         self.pet_name = pet_name

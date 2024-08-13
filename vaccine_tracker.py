@@ -41,7 +41,7 @@ class Vaccine_tracker():
                     vaccine_date_delta_21 = client.vaccine_date+timedelta(days=21)
                     vaccine_date_delta_30 = client.vaccine_date + timedelta(days=30)
                     msg = (
-                        f"Bom dia {client.name.split()[0].title()}, tudo bem? Aqui é da {self.petshop_name} e estou entrando em "
+                        f"Olá {client.name.split()[0].title()}, tudo bem? Aqui é da {self.petshop_name} e estou entrando em "
                         f"contato para lembrar da próxima dose da vacina do seu pet '{client.pet_name.title()}' que vence "
                         f"dentre os dias {vaccine_date_delta_21.day}/{vaccine_date_delta_21.month}/{vaccine_date_delta_21.year} e "
                         f"{vaccine_date_delta_30.day}/{vaccine_date_delta_30.month}/{vaccine_date_delta_30.year}."
@@ -66,7 +66,7 @@ class Vaccine_tracker():
                     print(f"Data da vacina 1 semana antes de fechar 1 ano: {client.vaccine_date + timedelta(days=365, weeks=-1)}")
 
                     msg = (
-                        f"Bom dia {client.name.split()[0].title()}, tudo bem? Aqui é da {self.petshop_name} e estou entrando em "
+                        f"Olá {client.name.split()[0].title()}, tudo bem? Aqui é da {self.petshop_name} e estou entrando em "
                         f"contato para lembrar da renovação da vacina do seu pet {client.pet_name.title()} que vence "
                         f"dentro de uma semana.\n\nCaso queira marcar a vacina, só nos avisar, ok?")
                     wpp_msg = urllib.parse.quote(msg)
@@ -78,7 +78,7 @@ class Vaccine_tracker():
                 If the dose value is not identified, a more "Generic" reminder will be sent.
                 """
                 msg = (
-                    f"Bom dia {client.name.split()[0].title()}, tudo bem? Aqui é da {self.petshop_name} e estou entrando em "
+                    f"Olá {client.name.split()[0].title()}, tudo bem? Aqui é da {self.petshop_name} e estou entrando em "
                     f"contato para lembrar de verificar a vacinação do seu pet {client.pet_name.title()}."
                     f"Nossas anotações indicam que está quase na data de revacinar."
                     f"\n\nCaso queira marcar a vacina, só nos avisar, ok?")
